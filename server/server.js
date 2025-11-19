@@ -67,4 +67,5 @@ function generateKey() {
     return Math.random().toString(36).substring(2, 10).toUpperCase();  
 }
 
+
 server.listen(8080, () => console.log("Server running on 8080"));
