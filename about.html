@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - TransIndia Group</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+        
+        :root {
+            --primary: #4a6572;
+            --secondary: #d35400; /* Warm orange */
+            --accent: #8d6e63;
+            --dark-bg: #000000; /* Black background */
+            --darker-bg: #1a1a1a;
+            --content-bg: #2a2a2a;
+            --text: #e8e8e8;
+            --text-light: #b8b8b8;
+            --border: #444444;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .content-section {
+            background: var(--content-bg);
+            padding: 50px;
+            margin-bottom: 40px;
+            border-radius: 4px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            border-left: 5px solid var(--secondary);
+        }
+        
+        h1, h2, h3, h4 {
+            margin-bottom: 25px;
+            color: #f5f5f5;
+            font-weight: 600;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 15px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+        
+        h3 {
+            font-size: 1.6rem;
+            color: var(--secondary);
+            margin-top: 35px;
+            margin-bottom: 20px;
+        }
+        
+        h4 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        
+        p {
+            margin-bottom: 25px;
+            font-size: 1.15rem;
+            color: var(--text-light);
+            text-align: justify;
+        }
+        
+        .intro {
+            font-size: 1.3rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--text);
+            font-style: italic;
+            padding: 0 20px;
+        }
+        
+        .highlight {
+            background: var(--darker-bg);
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 4px;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .philosophy-box {
+            background: var(--darker-bg);
+            padding: 35px;
+            margin: 40px 0;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+        
+        .philosophy-box h3 {
+            margin-top: 0;
+        }
+        
+        .values-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .value-item {
+            padding: 20px;
+            background: var(--darker-bg);
+            border-radius: 4px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .value-item h4 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .value-item h4 i {
+            margin-right: 15px;
+            color: var(--secondary);
+        }
+        
+        .features-list {
+            margin: 25px 0;
+            padding-left: 30px;
+        }
+        
+        .features-list li {
+            margin-bottom: 15px;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+        
+        .founder-section {
+            background: var(--darker-bg);
+            padding: 40px;
+            margin-top: 40px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+        
+        .founder-quote {
+            font-style: italic;
+            padding: 25px;
+            margin: 30px 0;
+            background: var(--content-bg);
+            border-radius: 4px;
+            border-left: 4px solid var(--secondary);
+            font-size: 1.2rem;
+        }
+        
+        .founder-name {
+            text-align: right;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-top: 10px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .content-section {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            h3 {
+                font-size: 1.4rem;
+            }
+            
+            p {
+                font-size: 1.05rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content-section">
+            <h1>TransIndia Group</h1>
+            <p class="intro">A dynamic and rapidly expanding conglomerate where challenges are not roadblocks but stepping stones to success. We see them as opportunities to drive transformation and create a lasting, positive impact on a grand scale.</p>
+            
+            <h2>Who We Are</h2>
+            <p>At TransIndia Group, the individual is always at the heart of our journey. Our goal is to walk in our customers' shoes, to deeply understand their needs and desires, and to deliver exceptional experiences that exceed expectations. From day one, we have remained committed to serving our customers around the clock, 365 days a year.</p>
+            
+            <div class="philosophy-box">
+                <h3>Our Philosophy: "You, Above All"</h3>
+                <p>"You, Above All," is more than a tagline—it's the core principle guiding everything we do. It reflects our commitment to prioritize people over profits, experiences over transactions, and relationships over deals. Whether you are a customer, team member, investor, vendor or partner, we ensure that you remain the focus of our efforts.</p>
+            </div>
+            
+            <h3>Our Approach</h3>
+            <div class="values-container">
+                <div class="value-item">
+                    <h4><i class="fas fa-lightbulb"></i> Empower</h4>
+                    <p>Through forward-thinking innovations that drive transformation and create lasting impact.</p>
+                </div>
+                <div class="value-item">
+                    <h4><i class="fas fa-star"></i> Enrich</h4>
+                    <p>Through exceptional experiences in real estate, media, and hospitality that exceed expectations.</p>
+                </div>
+                <div class="value-item">
+                    <h4><i class="fas fa-chart-line"></i> Elevate</h4>
+                    <p>By consistently delivering value and quality in everything we do for our stakeholders.</p>
+                </div>
+            </div>
+            
+            <h2>A Home to 'Your Home'</h2>
+            <p>At TransIndia, we are building homes that go beyond just living spaces—they are a blend of future-ready technology, aesthetic elegance, and functional design. Our homes are crafted with sustainability at the forefront, ensuring that they are not only environmentally conscious but also energy-efficient. We focus on maximizing space to offer expansive living areas that provide comfort and flexibility for families.</p>
+            
+            <div class="highlight">
+                <h4>Our Real Estate Vision</h4>
+                <p>With a keen eye on both design and investment value, every home we build is designed to offer better returns, making them a smart and rewarding choice for homeowners today and tomorrow.</p>
+            </div>
+            
+            <h3>Key Features of Our Properties</h3>
+            <ul class="features-list">
+                <li>Future-ready technology integration for modern living</li>
+                <li>Aesthetic elegance combined with functional design</li>
+                <li>Sustainable and energy-efficient construction</li>
+                <li>Expansive living areas designed for comfort and flexibility</li>
+                <li>Environmentally conscious building practices</li>
+                <li>Maximized space utilization for optimal living experience</li>
+            </ul>
+            
+            <h2>Bridging Cultures and Markets</h2>
+            <p>We are driven by a passion for bridging cultures and connecting markets. TransIndia Group is dedicated to showcasing the best that India has to offer to the world, while simultaneously bringing the finest global offerings to our local market. We believe in the power of cross-cultural exchange, creating spaces and experiences that leave an indelible mark on both local and global communities.</p>
+            
+            <div class="founder-section">
+                <h2>Our Founder</h2>
+                <h3>Mr. Rajendra Rajan</h3>
+                <h4>Founder, TransIndia</h4>
+                
+                <p>An untiring and self-motivated leader, Mr. Rajendra Rajan has been the driving force behind the group's rise to prominence in the real estate sector. With more than two decades of dedication, his vision and commitment have transformed the group into a leading brand, known for innovation and excellence.</p>
+                
+                <div class="founder-quote">
+                    "His leadership inspires others to go beyond the ordinary, motivating people within and outside the organization to reach new heights and make a meaningful impact."
+                    <div class="founder-name">- Mr. Rajendra Rajan</div>
+                </div>
+                
+                <p>A pioneer in slum redevelopment, he has helped provide better homes to over 1,000 families in Mumbai's suburbs, completing several landmark affordable housing projects. His passion for social welfare is evident through his active involvement in various charitable initiatives, always striving to give back to society.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
