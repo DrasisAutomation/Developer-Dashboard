@@ -1,39 +1,45 @@
-// server.js
-const express = require("express");
-const http = require("http");
-const WebSocket = require("ws");
-const path = require("path");
+// server.js (ESM Version)
+import express from "express";
+import http from "http";
+import WebSocket, { WebSocketServer } from "ws";
+import path from "path";
+import { fileURLToPath } from "url";
+
+// Fix __dirname for ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
+const wss = new WebSocketServer({ server });
 
 app.use(express.json());
-app.use(express.static(__dirname)); 
+app.use(express.static(__dirname)); // serve admin.html
 
-// Store room → key
-let roomKeys = {};  // { "201": "ABCD1234" }
+// Store keys for rooms (memory only)
+let roomKeys = {}; // { "201": "XYZ123" }
 
+// WebSocket handling
 wss.on("connection", ws => {
     console.log("Client connected");
 
-    ws.on("message", msg => {
-        const data = JSON.parse(msg);
+    ws.on("message", (raw) => {
+        const data = JSON.parse(raw);
 
-        // ADMIN GENERATES KEY
+        // Admin generates key
         if (data.type === "generate-key") {
             const room = data.room;
             const newKey = generateKey();
             roomKeys[room] = newKey;
 
-            // Broadcast ONLY to dashboards of that room
+            // Notify dashboards subscribed to this room
             broadcastToRoom(room, {
                 type: "room-key-update",
                 room,
                 key: newKey
             });
 
-            // Send back response to admin
+            // Send confirmation back to admin
             ws.send(JSON.stringify({
                 type: "admin-confirm",
                 room,
@@ -41,9 +47,11 @@ wss.on("connection", ws => {
             }));
         }
 
-        // DASHBOARD SUBSCRIBES TO ROOM
+        // Dashboard subscribes to a room
         if (data.type === "subscribe-room") {
             ws.room = data.room;
+
+            // If room already has a key
             if (roomKeys[data.room]) {
                 ws.send(JSON.stringify({
                     type: "room-key-update",
@@ -55,6 +63,7 @@ wss.on("connection", ws => {
     });
 });
 
+// Send message only to clients listening to that room
 function broadcastToRoom(room, message) {
     wss.clients.forEach(client => {
         if (client.readyState === WebSocket.OPEN && client.room === room) {
@@ -63,9 +72,12 @@ function broadcastToRoom(room, message) {
     });
 }
 
+// Random key generator
 function generateKey() {
-    return Math.random().toString(36).substring(2, 10).toUpperCase();  
+    return Math.random().toString(36).substring(2, 10).toUpperCase();
 }
 
-
-server.listen(8080, () => console.log("Server running on 8080"));
+// Start server
+server.listen(8080, () => {
+    console.log("Server running on http://localhost:8080");
+});
