@@ -1,38 +1,70 @@
-import express from "express";
-import cors from "cors";
+// server.js
+const express = require("express");
+const http = require("http");
+const WebSocket = require("ws");
+const path = require("path");
 
 const app = express();
-app.use(cors());
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
+
 app.use(express.json());
+app.use(express.static(__dirname)); 
 
-let messages = [];
+// Store room → key
+let roomKeys = {};  // { "201": "ABCD1234" }
 
-// Receive message from Home Assistant card
-app.post("/messages", (req, res) => {
-  const { message } = req.body;
-  if (!message) return res.status(400).json({ error: "No message provided" });
+wss.on("connection", ws => {
+    console.log("Client connected");
 
-  messages.push({
-    text: message,
-    time: new Date().toISOString()
-  });
+    ws.on("message", msg => {
+        const data = JSON.parse(msg);
 
-  console.log("New message:", message);
-  res.json({ status: "ok" });
+        // ADMIN GENERATES KEY
+        if (data.type === "generate-key") {
+            const room = data.room;
+            const newKey = generateKey();
+            roomKeys[room] = newKey;
+
+            // Broadcast ONLY to dashboards of that room
+            broadcastToRoom(room, {
+                type: "room-key-update",
+                room,
+                key: newKey
+            });
+
+            // Send back response to admin
+            ws.send(JSON.stringify({
+                type: "admin-confirm",
+                room,
+                key: newKey
+            }));
+        }
+
+        // DASHBOARD SUBSCRIBES TO ROOM
+        if (data.type === "subscribe-room") {
+            ws.room = data.room;
+            if (roomKeys[data.room]) {
+                ws.send(JSON.stringify({
+                    type: "room-key-update",
+                    room: data.room,
+                    key: roomKeys[data.room]
+                }));
+            }
+        }
+    });
 });
 
-// Admin panel fetches messages
-app.get("/api/messages", (req, res) => {
-  res.json(messages);
-});
+function broadcastToRoom(room, message) {
+    wss.clients.forEach(client => {
+        if (client.readyState === WebSocket.OPEN && client.room === room) {
+            client.send(JSON.stringify(message));
+        }
+    });
+}
 
-// Default response (optional)
-app.get("/", (req, res) => {
-  res.send("Message API is running.");
-});
+function generateKey() {
+    return Math.random().toString(36).substring(2, 10).toUpperCase();  
+}
 
-// Render port
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log("Server running on port", port);
-});
+server.listen(8080, () => console.log("Server running on 8080"));
